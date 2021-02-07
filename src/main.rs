@@ -2,6 +2,8 @@ use std::thread;
 use std::time::Duration;
 
 use lazy_static::lazy_static;
+use log::{debug, error, info};
+
 use prometheus::{Encoder, IntGaugeVec, TextEncoder};
 use speedtest_rs::speedtest;
 
@@ -21,18 +23,17 @@ use hyper::{
 
 #[tokio::main]
 async fn main() {
+    std::env::set_var("RUST_LOG", "speedtest_exporter=info");
+    env_logger::init();
+
     let addr = ([0, 0, 0, 0], 9100).into();
-    println!("Listening on http://{}", addr);
+    info!("Listening on http://{}", addr);
 
     thread::spawn(move || loop {
-        let config = speedtest::get_configuration().unwrap();
-        let srv_list = speedtest::get_server_list_with_config(&config).unwrap();
-        let mut srv_list = srv_list.servers_sorted_by_distance(&config);
-        srv_list.truncate(5);
-
-        for srv in &srv_list {
-            measure_download(srv, &DOWNLOAD_GAUGE_VEC);
-            measure_upload(srv, &UPLOAD_GAUGE_VEC);
+        debug!("start measure");
+        match measure_all() {
+            Ok(_) => info!("all measure success"),
+            Err(err) => error!("{:?}", err),
         }
 
         thread::sleep(Duration::from_secs(5 * 60));
@@ -43,8 +44,28 @@ async fn main() {
     }));
 
     if let Err(err) = serve_future.await {
-        eprintln!("server error: {}", err);
+        error!("server error: {}", err);
     }
+}
+
+fn measure_all() -> Result<(), speedtest_rs::error::Error> {
+    let config = speedtest::get_configuration()?;
+    let srv_list = speedtest::get_server_list_with_config(&config)?;
+    let mut srv_list = srv_list.servers_sorted_by_distance(&config);
+    srv_list.truncate(5);
+
+    for srv in &srv_list {
+        let dl = measure_download(srv, &DOWNLOAD_GAUGE_VEC)?;
+        let ul = measure_upload(srv, &UPLOAD_GAUGE_VEC)?;
+        info!(
+            "{}: download={}Mbps, upload={}Mbps",
+            srv.host,
+            dl as f64 / 1000.0,
+            ul as f64 / 1000.0
+        );
+    }
+
+    Ok(())
 }
 
 async fn serve_req(_req: Request<Body>) -> Result<Response<Body>, hyper::Error> {
@@ -76,20 +97,38 @@ async fn serve_req(_req: Request<Body>) -> Result<Response<Body>, hyper::Error> 
 //    }
 //}
 
-fn measure_download(srv: &speedtest::SpeedTestServer, gauge: &IntGaugeVec) {
-    let mut config = speedtest::get_configuration().unwrap();
+fn measure_download(
+    srv: &speedtest::SpeedTestServer,
+    gauge: &IntGaugeVec,
+) -> Result<i64, speedtest_rs::error::Error> {
+    let mut config = speedtest::get_configuration()?;
     let download = speedtest::test_download_with_progress_and_config(srv, || {}, &mut config);
-    let download = download.unwrap().kbps();
-    gauge
-        .with_label_values(&[&srv.country, &srv.host])
-        .set(download as i64);
+
+    let dl;
+    if let Ok(download) = download {
+        dl = download.kbps() as i64;
+    } else {
+        dl = 0;
+    }
+
+    gauge.with_label_values(&[&srv.country, &srv.host]).set(dl);
+    Ok(dl)
 }
 
-fn measure_upload(srv: &speedtest::SpeedTestServer, gauge: &IntGaugeVec) {
-    let mut config = speedtest::get_configuration().unwrap();
+fn measure_upload(
+    srv: &speedtest::SpeedTestServer,
+    gauge: &IntGaugeVec,
+) -> Result<i64, speedtest_rs::error::Error> {
+    let mut config = speedtest::get_configuration()?;
     let upload = speedtest::test_upload_with_progress_and_config(srv, || {}, &mut config);
-    let upload = upload.unwrap().kbps();
-    gauge
-        .with_label_values(&[&srv.country, &srv.host])
-        .set(upload as i64);
+
+    let ul;
+    if let Ok(upload) = upload {
+        ul = upload.kbps() as i64;
+    } else {
+        ul = 0;
+    }
+
+    gauge.with_label_values(&[&srv.country, &srv.host]).set(ul);
+    Ok(ul)
 }
