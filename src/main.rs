@@ -5,6 +5,7 @@ use lazy_static::lazy_static;
 use log::{debug, error, info};
 
 use prometheus::{Encoder, IntGaugeVec, TextEncoder};
+use speedtest_rs::error::Error;
 use speedtest_rs::speedtest;
 
 lazy_static! {
@@ -33,7 +34,20 @@ async fn main() {
         debug!("start measure");
         match measure_all() {
             Ok(_) => info!("all measure success"),
-            Err(err) => error!("{:?}", err),
+            Err(err) => match err {
+                Error::Reqwest(req) => {
+                    if req.is_connect() {
+                        error!("connect error");
+                    } else if req.is_timeout() {
+                        error!("timeout error");
+                    }
+                    error!("{:?}", req);
+
+                    DOWNLOAD_GAUGE_VEC.reset();
+                    UPLOAD_GAUGE_VEC.reset();
+                }
+                _ => error!("error: {:?}", err),
+            },
         }
 
         thread::sleep(Duration::from_secs(5 * 60));
