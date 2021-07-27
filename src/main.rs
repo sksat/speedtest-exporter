@@ -22,6 +22,9 @@ use hyper::{
     Body, Request, Response,
 };
 
+#[cfg(test)]
+pub mod test;
+
 #[tokio::main]
 async fn main() {
     std::env::set_var("RUST_LOG", "speedtest_exporter=info");
