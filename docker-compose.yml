@@ -3,6 +3,6 @@ services:
   speedtest-exporter:
     restart: always
     #build: .
-    image: ghcr.io/sksat/speedtest-exporter:main
+    image: ghcr.io/sksat/speedtest-exporter:ci-cd
     ports:
       - 9100:9100
