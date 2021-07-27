@@ -3,8 +3,7 @@ name: Build Container Image
 on:
   push:
     branches:
-      - main
-      - distroless
+      - '*'
     tags:
       - v*
     paths:
