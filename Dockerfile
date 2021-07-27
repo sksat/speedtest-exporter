@@ -3,7 +3,7 @@ WORKDIR build
 ADD . .
 RUN cargo build --release
 
-FROM alpine:latest
+FROM gcr.io/distroless/cc
 WORKDIR app
 COPY --from=builder /build/target/release/speedtest-exporter /app
 CMD ["/app/speedtest-exporter"]
