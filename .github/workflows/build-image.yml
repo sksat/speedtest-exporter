@@ -3,8 +3,7 @@ name: Build Container Image
 on:
   push:
     branches:
-      - master
-      - ci-cd
+      - main
     tags:
       - v*
     paths:
