@@ -6,6 +6,7 @@ on:
       - 'src/**'
       - 'Cargo.toml'
       - 'Cargo.lock'
+      - 'rust-toolchain'
       - '.github/workflows/ci.yml'
 
 jobs:
