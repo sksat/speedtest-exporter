@@ -1,0 +1,19 @@
+name: validate renovate
+
+on: push
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+
+      - name: install 
+        run: |
+          npm install -g renovate
+
+      - name: validate
+        run: |
+          renovate-config-validator
