@@ -557,9 +557,9 @@ dependencies = [
 
 [[package]]
 name = "hyper"
-version = "0.14.14"
+version = "0.14.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2b91bb1f221b6ea1f1e4371216b70f40748774c2fb5971b450c07773fb92d26b"
+checksum = "436ec0091e4f20e655156a30a0df3770fe2900aa301e548e08446ec794b6953c"
 dependencies = [
  "bytes 1.1.0",
  "futures-channel",
@@ -1406,7 +1406,7 @@ name = "speedtest-exporter"
 version = "0.1.0"
 dependencies = [
  "env_logger 0.9.0",
- "hyper 0.14.14",
+ "hyper 0.14.15",
  "lazy_static",
  "log",
  "prometheus",
