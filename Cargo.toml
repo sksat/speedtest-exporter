@@ -8,7 +8,7 @@ edition = "2018"
 
 [dependencies]
 env_logger = "0.9.0"
-hyper = { version = "0.14.16", features = ["full"] }
+hyper = { version = "0.14.17", features = ["full"] }
 lazy_static = "1.4.0"
 log = "0.4.14"
 prometheus = "0.13.0"
