@@ -22,15 +22,29 @@ use hyper::{
     Body, Request, Response,
 };
 
+use structopt::StructOpt;
+
 #[cfg(test)]
 pub mod test;
+
+#[derive(Debug, StructOpt)]
+#[structopt(name = "speedtest-exporter")]
+struct Opt {
+    #[structopt(env, default_value = "9100")]
+    speedtest_exporter_port: u16,
+
+    #[structopt(env, default_value = "300")]
+    speedtest_interval: u64,
+}
 
 #[tokio::main]
 async fn main() {
     std::env::set_var("RUST_LOG", "speedtest_exporter=info");
     env_logger::init();
 
-    let addr = ([0, 0, 0, 0], 9100).into();
+    let opt = Opt::from_args();
+
+    let addr = ([0, 0, 0, 0], opt.speedtest_exporter_port).into();
     info!("Listening on http://{}", addr);
 
     thread::spawn(move || loop {
@@ -53,7 +67,7 @@ async fn main() {
             },
         }
 
-        thread::sleep(Duration::from_secs(5 * 60));
+        thread::sleep(Duration::from_secs(opt.speedtest_interval));
     });
 
     let serve_future = Server::bind(&addr).serve(make_service_fn(|_| async {
