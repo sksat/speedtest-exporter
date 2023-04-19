@@ -150,8 +150,8 @@ fn measure_upload(
     srv: &speedtest::SpeedTestServer,
     gauge: &IntGaugeVec,
 ) -> Result<i64, speedtest_rs::error::Error> {
-    let mut config = speedtest::get_configuration()?;
-    let upload = speedtest::test_upload_with_progress_and_config(srv, || {}, &mut config);
+    let config = speedtest::get_configuration()?;
+    let upload = speedtest::test_upload_with_progress_and_config(srv, || {}, &config);
 
     let ul;
     if let Ok(upload) = upload {
