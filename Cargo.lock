@@ -467,7 +467,7 @@ dependencies = [
  "http",
  "indexmap",
  "slab",
- "tokio 1.28.1",
+ "tokio 1.28.2",
  "tokio-util 0.7.7",
  "tracing",
 ]
@@ -612,7 +612,7 @@ dependencies = [
  "itoa 1.0.1",
  "pin-project-lite 0.2.7",
  "socket2 0.4.9",
- "tokio 1.28.1",
+ "tokio 1.28.2",
  "tower-service",
  "tracing",
  "want",
@@ -1469,7 +1469,7 @@ dependencies = [
  "prometheus",
  "speedtest-rs",
  "structopt",
- "tokio 1.28.1",
+ "tokio 1.28.2",
 ]
 
 [[package]]
@@ -1643,9 +1643,9 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.28.1"
+version = "1.28.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0aa32867d44e6f2ce3385e89dceb990188b8bb0fb25b0cf576647a6f98ac5105"
+checksum = "94d7b1cfd2aa4011f2de74c2c4c63665e27a71006b0a192dcd2710272e73dfa2"
 dependencies = [
  "autocfg",
  "bytes 1.1.0",
@@ -1705,7 +1705,7 @@ dependencies = [
  "futures-core",
  "futures-sink",
  "pin-project-lite 0.2.7",
- "tokio 1.28.1",
+ "tokio 1.28.2",
  "tracing",
 ]
 
