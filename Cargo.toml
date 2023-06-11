@@ -10,7 +10,7 @@ edition = "2018"
 env_logger = "0.10.0"
 hyper = { version = "0.14.26", features = ["full"] }
 lazy_static = "1.4.0"
-log = "0.4.18"
+log = "0.4.19"
 prometheus = "0.13.3"
 speedtest-rs = "0.1.2"
 structopt = "0.3.26"
