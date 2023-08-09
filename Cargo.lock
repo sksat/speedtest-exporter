@@ -436,7 +436,7 @@ dependencies = [
  "futures-io",
  "futures-task",
  "memchr",
- "pin-project-lite 0.2.7",
+ "pin-project-lite 0.2.12",
  "pin-utils",
  "slab",
 ]
@@ -503,7 +503,7 @@ dependencies = [
  "http",
  "indexmap",
  "slab",
- "tokio 1.29.1",
+ "tokio 1.30.0",
  "tokio-util 0.7.7",
  "tracing",
 ]
@@ -570,7 +570,7 @@ checksum = "1ff4f84919677303da5f147645dbea6b1881f368d03ac84e1dc09031ebd7b2c6"
 dependencies = [
  "bytes 1.1.0",
  "http",
- "pin-project-lite 0.2.7",
+ "pin-project-lite 0.2.12",
 ]
 
 [[package]]
@@ -646,9 +646,9 @@ dependencies = [
  "httparse",
  "httpdate 1.0.1",
  "itoa 1.0.1",
- "pin-project-lite 0.2.7",
+ "pin-project-lite 0.2.12",
  "socket2 0.4.9",
- "tokio 1.29.1",
+ "tokio 1.30.0",
  "tower-service",
  "tracing",
  "want",
@@ -1070,9 +1070,9 @@ checksum = "257b64915a082f7811703966789728173279bdebb956b143dbcd23f6f970a777"
 
 [[package]]
 name = "pin-project-lite"
-version = "0.2.7"
+version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8d31d11c69a6b52a174b42bdc0c30e5e11670f90788b2c471c31c1d17d449443"
+checksum = "12cc1b0bf1727a77a54b6654e7b5f1af8604923edc8b81885f8ec92f9e3f0a05"
 
 [[package]]
 name = "pin-utils"
@@ -1331,7 +1331,7 @@ dependencies = [
  "mime_guess",
  "native-tls",
  "percent-encoding",
- "pin-project-lite 0.2.7",
+ "pin-project-lite 0.2.12",
  "serde",
  "serde_urlencoded 0.7.0",
  "tokio 0.2.25",
@@ -1515,6 +1515,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "socket2"
+version = "0.5.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2538b18701741680e0322a2302176d3253a35388e2e62f172f64f4f16605f877"
+dependencies = [
+ "libc",
+ "windows-sys 0.48.0",
+]
+
+[[package]]
 name = "speedtest-exporter"
 version = "0.1.0"
 dependencies = [
@@ -1525,7 +1535,7 @@ dependencies = [
  "prometheus",
  "speedtest-rs",
  "structopt",
- "tokio 1.29.1",
+ "tokio 1.30.0",
 ]
 
 [[package]]
@@ -1699,20 +1709,19 @@ dependencies = [
 
 [[package]]
 name = "tokio"
-version = "1.29.1"
+version = "1.30.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "532826ff75199d5833b9d2c5fe410f29235e25704ee5f0ef599fb51c21f4a4da"
+checksum = "2d3ce25f50619af8b0aec2eb23deebe84249e19e2ddd393a6e16e3300a6dadfd"
 dependencies = [
- "autocfg",
  "backtrace",
  "bytes 1.1.0",
  "libc",
  "mio 0.8.8",
  "num_cpus",
  "parking_lot",
- "pin-project-lite 0.2.7",
+ "pin-project-lite 0.2.12",
  "signal-hook-registry",
- "socket2 0.4.9",
+ "socket2 0.5.3",
  "tokio-macros",
  "windows-sys 0.48.0",
 ]
@@ -1761,8 +1770,8 @@ dependencies = [
  "bytes 1.1.0",
  "futures-core",
  "futures-sink",
- "pin-project-lite 0.2.7",
- "tokio 1.29.1",
+ "pin-project-lite 0.2.12",
+ "tokio 1.30.0",
  "tracing",
 ]
 
@@ -1780,7 +1789,7 @@ checksum = "375a639232caf30edfc78e8d89b2d4c375515393e7af7e16f01cd96917fb2105"
 dependencies = [
  "cfg-if 1.0.0",
  "log",
- "pin-project-lite 0.2.7",
+ "pin-project-lite 0.2.12",
  "tracing-core",
 ]
 
