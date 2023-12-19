@@ -14,4 +14,4 @@ log = "0.4.20"
 prometheus = "0.13.3"
 speedtest-rs = "0.1.2"
 structopt = "0.3.26"
-tokio = { version = "1.35.0", features = ["full"] }
+tokio = { version = "1.35.1", features = ["full"] }
