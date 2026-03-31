@@ -95,6 +95,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "atomic-waker"
+version = "1.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1505bd5d3d116872e7271a6d4e16d81d0c8570876c8de68093a09ac269d8aac0"
+
+[[package]]
 name = "atty"
 version = "0.2.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -529,7 +535,7 @@ dependencies = [
  "futures-core",
  "futures-sink",
  "futures-util",
- "http",
+ "http 0.2.5",
  "indexmap 1.7.0",
  "slab",
  "tokio 0.2.25",
@@ -540,16 +546,16 @@ dependencies = [
 
 [[package]]
 name = "h2"
-version = "0.3.26"
+version = "0.4.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "81fe527a889e1532da5c525686d96d4c2e74cdd345badf8dfef9f6b39dd5f5e8"
+checksum = "2f44da3a8150a6703ed5d34e164b875fd14c2cdab9af1252a9a1020bde2bdc54"
 dependencies = [
+ "atomic-waker",
  "bytes 1.10.1",
  "fnv",
  "futures-core",
  "futures-sink",
- "futures-util",
- "http",
+ "http 1.4.0",
  "indexmap 2.8.0",
  "slab",
  "tokio 1.45.1",
@@ -599,24 +605,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "http"
+version = "1.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e3ba2a386d7f85a81f119ad7498ebe444d2e22c2af0b86b069416ace48b3311a"
+dependencies = [
+ "bytes 1.10.1",
+ "itoa 1.0.1",
+]
+
+[[package]]
 name = "http-body"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "13d5ff830006f7646652e057693569bfe0d51760c0085a071769d142a205111b"
 dependencies = [
  "bytes 0.5.6",
- "http",
+ "http 0.2.5",
 ]
 
 [[package]]
 name = "http-body"
-version = "0.4.4"
+version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1ff4f84919677303da5f147645dbea6b1881f368d03ac84e1dc09031ebd7b2c6"
+checksum = "1efedce1fb8e6913f23e0c92de8e62cd5b772a67e7b3946df930a62566c93184"
 dependencies = [
  "bytes 1.10.1",
- "http",
- "pin-project-lite 0.2.12",
+ "http 1.4.0",
 ]
 
 [[package]]
@@ -663,7 +678,7 @@ dependencies = [
  "futures-core",
  "futures-util",
  "h2 0.2.7",
- "http",
+ "http 0.2.5",
  "http-body 0.3.1",
  "httparse",
  "httpdate 0.3.2",
@@ -678,25 +693,21 @@ dependencies = [
 
 [[package]]
 name = "hyper"
-version = "0.14.32"
+version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41dfc780fdec9373c01bae43289ea34c972e40ee3c9f6b3c8801a35f35586ce7"
+checksum = "fb5aa53871fc917b1a9ed87b683a5d86db645e23acb32c2e0785a353e522fb75"
 dependencies = [
  "bytes 1.10.1",
  "futures-channel",
- "futures-core",
  "futures-util",
- "h2 0.3.26",
- "http",
- "http-body 0.4.4",
+ "h2 0.4.13",
+ "http 1.4.0",
+ "http-body 1.0.1",
  "httparse",
  "httpdate 1.0.1",
  "itoa 1.0.1",
  "pin-project-lite 0.2.12",
- "socket2 0.5.5",
  "tokio 1.45.1",
- "tower-service",
- "tracing",
  "want",
 ]
 
@@ -1361,7 +1372,7 @@ dependencies = [
  "encoding_rs",
  "futures-core",
  "futures-util",
- "http",
+ "http 0.2.5",
  "http-body 0.3.1",
  "hyper 0.13.10",
  "hyper-tls",
@@ -1547,7 +1558,7 @@ name = "speedtest-exporter"
 version = "0.1.0"
 dependencies = [
  "env_logger 0.11.6",
- "hyper 0.14.32",
+ "hyper 1.1.0",
  "lazy_static",
  "log",
  "prometheus",
