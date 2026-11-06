@@ -12,6 +12,6 @@ hyper = { version = "0.14.28", features = ["full"] }
 lazy_static = "1.4.0"
 log = "0.4.21"
 prometheus = "0.14.0"
-speedtest-rs = "0.1.2"
+speedtest-rs = "0.2.0"
 structopt = "0.3.26"
 tokio = { version = "1.37.0", features = ["full"] }
